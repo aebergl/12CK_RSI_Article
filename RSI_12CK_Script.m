@@ -596,3 +596,79 @@ text(ah2,0.05,0.95,Str,'HorizontalAlignment','left','VerticalAlignment','top','C
 legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
 
 SavePDF_AEB('Figure_5B')
+
+
+
+%%
+%Figure 6
+
+SheetName="Concordance";
+opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
+T=readtable('DATA_Table.xlsx',opts);
+X_Samples = "MCC_" + wildcardPattern;
+Y_Samples = "COV_" + wildcardPattern;
+Groups = table2array(T(X_Samples,'Display Name'));
+UniqueGroups = unique(Groups,'Stable');
+nGroups = length(UniqueGroups);
+AxisType = 'equal';
+
+fh = figure('Name','Figure 1','Color','w','Tag','Figure 1','Units','inches','Colormap',cMAP);
+fh.Position(3:4) = [7 5];
+th = tiledlayout(fh,1,2,'TileSpacing','compact','padding','compact');
+AxisType = 'equal';
+
+% 12CK
+x_var=table2array(T(X_Samples,'12CK'));
+y_var=table2array(T(Y_Samples,'12CK'));
+
+ah1 = nexttile(th);
+set(ah1,'NextPlot','add','tag','Gene Sample Plot','Box','on','FontSize',FontSize,...
+    'Linewidth',LineWidth,'XGrid','on','YGrid','on');
+ah1.LineWidth = LineWidth;
+ah1.Colormap=cMAP;
+axis(AxisType);
+min_xy = min([x_var;y_var]);
+max_xy = max([x_var;y_var]);
+NudgeVal = (max_xy - min_xy) / 25;
+ah1.XLim=[min_xy-NudgeVal max_xy+NudgeVal];
+ah1.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
+
+[fh, stats] = PassingBablok(x_var,y_var,'MCC 12CK','Covance 12CK',true,fh,ah1);
+% xlabel('Surgery 12CK');
+% ylabel('Biopsy 12CK')
+% line(ah1,[ah1.XLim(1) ah1.XLim(2)],[ah1.YLim(1) ah1.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
+% [r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
+% [r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
+% Str(1) = {sprintf('r = %.3f p = %0.3g',r_corr_P,p_corr_P)};
+% Str(2) = {sprintf('\\rho = %.3f p = %0.3g',r_corr_S, p_corr_S)};
+% Str(1) = {sprintf('r = %.3f',r_corr_P)};
+% Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
+% text(ah1,min_xy + NudgeVal/2,max_xy-NudgeVal/2,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
+
+% RSI
+x_var=table2array(T(X_Samples,'RSI'));
+y_var=table2array(T(Y_Samples,'RSI'));
+ah2 = nexttile(th);
+set(ah2,'NextPlot','add','tag','Gene Sample Plot','Box','on','FontSize',FontSize,...
+    'Linewidth',LineWidth,'XGrid','on','YGrid','on');
+ah2.LineWidth = LineWidth;
+ah2.Colormap=cMAP;
+axis(AxisType);
+min_xy = min([x_var;y_var]);
+max_xy = max([x_var;y_var]);
+NudgeVal = (max_xy - min_xy) / 25;
+ah2.XLim=[min_xy-NudgeVal max_xy+NudgeVal];
+ah2.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
+[fh, stats] = PassingBablok(x_var,y_var,'MCC RSI','Covance RSI',true,fh,ah2);
+
+% xlabel('Surgery RSI');
+% ylabel('Biopsy RSI')
+% line(ah2,[ah2.XLim(1) ah2.XLim(2)],[ah2.YLim(1) ah2.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
+% [r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
+% [r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
+% Str(1) = {sprintf('r = %.3f',r_corr_P)};
+% Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
+% text(ah2,0.05,0.95,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
+% legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
+
+SavePDF_AEB('Figure_6')
