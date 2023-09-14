@@ -15,6 +15,7 @@ AlphaValueMarkerLine = 0.8;
 MarkerEdgeColor = [0.1 0.1 0.1];
 MarkerTypes = {'o','d','v','^','<','>'}';
 MarkerTypes = repmat(MarkerTypes,10,1);
+NudgeAmount = 20;
 
 %%
 % Figure 1A
@@ -45,7 +46,7 @@ ah1.Colormap=cMAP;
 axis(AxisType);
 min_xy = min([x_var;y_var]);
 max_xy = max([x_var;y_var]);
-NudgeVal = (max_xy - min_xy) / 25;
+NudgeVal = (max_xy - min_xy) / NudgeAmount;
 ah1.XLim=[min_xy-NudgeVal max_xy+NudgeVal];
 ah1.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
 for i = 1:nGroups
@@ -122,6 +123,12 @@ axis(AxisType);
 ah1.XLim=[0.5 n+0.5];
 ah1.XTick=1:n;
 ah1.XTickLabel=[];
+
+min_y = min(y_var);
+max_y = max(y_var);
+NudgeVal = (max_y - min_y) / NudgeAmount;
+ah1.YLim=[min_y-NudgeVal max_y+NudgeVal];
+
 for i = 1:nGroups
     indx = strcmp(UniqueGroups(i),Groups);
     sh = scatter(ah1,x_var(indx),y_var(indx),MarkerSize,cMAP(i,:),MarkerTypes{i},'Linewidth',MarkerEdgeLineWidth,'MarkerFaceColor','flat','MarkerEdgeColor',MarkerEdgeColor);
@@ -144,6 +151,7 @@ axis(AxisType);
 ah2.XLim=[0.5 n+0.5];
 ah2.XTick=1:n;
 ah2.XTickLabel=[];
+ah2.YLim=[0 1];
 for i = 1:nGroups
     indx = strcmp(UniqueGroups(i),Groups);
     sh = scatter(ah2,x_var(indx),y_var(indx),MarkerSize,cMAP(i,:),MarkerTypes{i},'Linewidth',MarkerEdgeLineWidth,'MarkerFaceColor','flat','MarkerEdgeColor',MarkerEdgeColor);
@@ -187,6 +195,10 @@ axis(AxisType);
 ah1.XLim=[0.5 n+0.5];
 ah1.XTick=1:n;
 ah1.XTickLabel=[];
+min_y = min(y_var);
+max_y = max(y_var);
+NudgeVal = (max_y - min_y) / NudgeAmount;
+ah1.YLim=[min_y-NudgeVal max_y+NudgeVal];
 for i = 1:nGroups
     indx = strcmp(UniqueGroups(i),Groups);
     sh = scatter(ah1,x_var(indx),y_var(indx),MarkerSize,cMAP(i,:),MarkerTypes{i},'Linewidth',MarkerEdgeLineWidth,'MarkerFaceColor','flat','MarkerEdgeColor',MarkerEdgeColor);
@@ -209,6 +221,7 @@ axis(AxisType);
 ah2.XLim=[0.5 n+0.5];
 ah2.XTick=1:n;
 ah2.XTickLabel=[];
+ah2.YLim=[0 1];
 for i = 1:nGroups
     indx = strcmp(UniqueGroups(i),Groups);
     sh = scatter(ah2,x_var(indx),y_var(indx),MarkerSize,cMAP(i,:),MarkerTypes{i},'Linewidth',MarkerEdgeLineWidth,'MarkerFaceColor','flat','MarkerEdgeColor',MarkerEdgeColor);
@@ -254,6 +267,10 @@ axis(AxisType);
 ah1.XLim=[0.5 n+0.5];
 ah1.XTick=1:n;
 ah1.XTickLabel=[];
+min_y = min(y_var);
+max_y = max(y_var);
+NudgeVal = (max_y - min_y) / NudgeAmount;
+ah1.YLim=[min_y-NudgeVal max_y+NudgeVal];
 for i = 1:nGroups
     indx = strcmp(UniqueGroups(i),Groups);
     sh = scatter(ah1,x_var(indx),y_var(indx),MarkerSize,cMAP(i,:),MarkerTypes{i},'Linewidth',MarkerEdgeLineWidth,'MarkerFaceColor','flat','MarkerEdgeColor',MarkerEdgeColor);
@@ -276,6 +293,7 @@ axis(AxisType);
 ah2.XLim=[0.5 n+0.5];
 ah2.XTick=1:n;
 ah2.XTickLabel=[];
+ah2.YLim=[0 1];
 for i = 1:nGroups
     indx = strcmp(UniqueGroups(i),Groups);
     sh = scatter(ah2,x_var(indx),y_var(indx),MarkerSize,cMAP(i,:),MarkerTypes{i},'Linewidth',MarkerEdgeLineWidth,'MarkerFaceColor','flat','MarkerEdgeColor',MarkerEdgeColor);
@@ -320,6 +338,10 @@ ah1.XTick=1:n;
 ah1.XTickLabel=SampleId;
 ah1.XTickLabelRotation=-45;
 ah1.TickLabelInterpreter='none';
+min_y = min(y_var);
+max_y = max(y_var);
+NudgeVal = (max_y - min_y) / NudgeAmount;
+ah1.YLim=[min_y-NudgeVal max_y+NudgeVal];
 for i = 1:nGroups
     indx = strcmp(UniqueGroups(i),Groups);
     sh = scatter(ah1,x_var(indx),y_var(indx),MarkerSize,cMAP(i,:),MarkerTypes{i},'Linewidth',MarkerEdgeLineWidth,'MarkerFaceColor','flat','MarkerEdgeColor',MarkerEdgeColor);
@@ -344,6 +366,7 @@ ah2.XTick=1:n;
 ah2.XTickLabel=SampleId;
 ah2.XTickLabelRotation=-45;
 ah2.TickLabelInterpreter='none';
+ah2.YLim=[0 1];
 for i = 1:nGroups
     indx = strcmp(UniqueGroups(i),Groups);
     sh = scatter(ah2,x_var(indx),y_var(indx),MarkerSize,cMAP(i,:),MarkerTypes{i},'Linewidth',MarkerEdgeLineWidth,'MarkerFaceColor','flat','MarkerEdgeColor',MarkerEdgeColor);
@@ -360,64 +383,70 @@ SavePDF_AEB('Figure_3')
 
 %%
 
-% Figure 4 Impact of macrodissection
+% Figure 4
+cMAP=GetPalette('Tab10');
+MarkerTypes = {'o','o','o','^','^','^','d','d','d'}';
+MarkerTypes = repmat(MarkerTypes,10,1);
+
+
+
 SheetName="ImpMacroDiss";
 opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
 T=readtable('DATA_Table.xlsx',opts);
-X_Samples = wildcardPattern + "_A";
-Y_Samples = wildcardPattern + "_B";
-Groups = table2array(T(X_Samples,'Display Name'));
+
+Groups = table2array(T(:,'Display Name'));
 UniqueGroups = unique(Groups,'Stable');
 nGroups = length(UniqueGroups);
-
+SampleId = table2array(T(:,'Sample Id'));
 
 fh = figure('Name','Figure 1','Color','w','Tag','Figure 1','Units','inches','Colormap',cMAP);
 fh.Position(3:4) = FigureSize;
 th = tiledlayout(fh,1,2,'TileSpacing','tight','padding','compact');
-AxisType = 'equal';
+AxisType = 'normal';
 
-% 12CK
-x_var=table2array(T(X_Samples,'12CK'));
-y_var=table2array(T(Y_Samples,'12CK'));
-
+% A, 12CK
+y_var=table2array(T(:,'12CK'));
+n=length(y_var);
+x_var=(1:n)';
 ah1 = nexttile(th);
 set(ah1,'NextPlot','add','tag','Gene Sample Plot','Box','on','FontSize',FontSize,...
     'Linewidth',LineWidth,'XGrid','on','YGrid','on');
 ah1.LineWidth = LineWidth;
 ah1.Colormap=cMAP;
 axis(AxisType);
-min_xy = min([x_var;y_var]);
-max_xy = max([x_var;y_var]);
-NudgeVal = (max_xy - min_xy) / 25;
-ah1.XLim=[min_xy-NudgeVal max_xy+NudgeVal];
-ah1.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
+ah1.XLim=[0.5 n+0.5];
+ah1.XTick=1:n;
+ah1.XTickLabel=SampleId;
+ah1.XTickLabelRotation=-45;
+ah1.TickLabelInterpreter='none';
+min_y = min(y_var);
+max_y = max(y_var);
+NudgeVal = (max_y - min_y) / NudgeAmount;
+ah1.YLim=[min_y-NudgeVal max_y+NudgeVal];
 for i = 1:nGroups
     indx = strcmp(UniqueGroups(i),Groups);
     sh = scatter(ah1,x_var(indx),y_var(indx),MarkerSize,cMAP(i,:),MarkerTypes{i},'Linewidth',MarkerEdgeLineWidth,'MarkerFaceColor','flat','MarkerEdgeColor',MarkerEdgeColor);
     sh.MarkerEdgeAlpha = AlphaValueMarkerLine;
     sh.MarkerFaceAlpha = AlphaValue;
 end
-xlabel('Macrodissection Study 1 12CK');
-ylabel('Macrodissection Study 2 12CK')
-line(ah1,[ah1.XLim(1) ah1.XLim(2)],[ah1.YLim(1) ah1.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
-[r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
-[r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
-% Str(1) = {sprintf('r = %.3f p = %0.3g',r_corr_P,p_corr_P)};
-% Str(2) = {sprintf('\\rho = %.3f p = %0.3g',r_corr_S, p_corr_S)};
-Str(1) = {sprintf('r = %.3f',r_corr_P)};
-Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
-text(ah1,min_xy + NudgeVal/2,max_xy-NudgeVal/2,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
+xlabel('Sample');
+ylabel('12CK')
 
-% RSI
-x_var=table2array(T(X_Samples,'RSI'));
-y_var=table2array(T(Y_Samples,'RSI'));
+% B, RSI
+y_var=table2array(T(:,'RSI'));
+n=length(y_var);
+x_var=(1:n)';
 ah2 = nexttile(th);
 set(ah2,'NextPlot','add','tag','Gene Sample Plot','Box','on','FontSize',FontSize,...
     'Linewidth',LineWidth,'XGrid','on','YGrid','on');
 ah2.LineWidth = LineWidth;
 ah2.Colormap=cMAP;
 axis(AxisType);
-ah2.XLim=[0 1];
+ah2.XLim=[0.5 n+0.5];
+ah2.XTick=1:n;
+ah2.XTickLabel=SampleId;
+ah2.XTickLabelRotation=-45;
+ah2.TickLabelInterpreter='none';
 ah2.YLim=[0 1];
 for i = 1:nGroups
     indx = strcmp(UniqueGroups(i),Groups);
@@ -425,21 +454,25 @@ for i = 1:nGroups
     sh.MarkerEdgeAlpha = AlphaValueMarkerLine;
     sh.MarkerFaceAlpha = AlphaValue;
 end
-xlabel('Macrodissection Study 1 RSI');
-ylabel('Macrodissection Study 2 RSI');
-line(ah2,[ah2.XLim(1) ah2.XLim(2)],[ah2.YLim(1) ah2.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
-[r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
-[r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
-Str(1) = {sprintf('r = %.3f',r_corr_P)};
-Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
-text(ah2,0.05,0.95,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
-legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
+xlabel('Sample');
+ylabel('RSI')
 
+legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
 SavePDF_AEB('Figure_4')
+
+
+
+
+
 
 
 %%
 %Figure 5A
+
+cMAP=GetPalette('Tab10');
+MarkerTypes = {'o','d','v','^','<','>'}';
+MarkerTypes = repmat(MarkerTypes,10,1);
+
 
 SheetName="SurgVsBiop_A";
 opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
@@ -468,7 +501,7 @@ ah1.Colormap=cMAP;
 axis(AxisType);
 min_xy = min([x_var;y_var]);
 max_xy = max([x_var;y_var]);
-NudgeVal = (max_xy - min_xy) / 25;
+NudgeVal = (max_xy - min_xy) / NudgeAmount;
 ah1.XLim=[min_xy-NudgeVal max_xy+NudgeVal];
 ah1.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
 for i = 1:nGroups
@@ -548,7 +581,7 @@ ah1.Colormap=cMAP;
 axis(AxisType);
 min_xy = min([x_var;y_var]);
 max_xy = max([x_var;y_var]);
-NudgeVal = (max_xy - min_xy) / 25;
+NudgeVal = (max_xy - min_xy) / NudgeAmount;
 ah1.XLim=[min_xy-NudgeVal max_xy+NudgeVal];
 ah1.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
 for i = 1:nGroups
