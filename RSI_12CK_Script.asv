@@ -60,7 +60,7 @@ for i = 1:nGroups
     sh.MarkerFaceAlpha = AlphaValue;
 end
 xlabel(strcat("MCC ",Label_12CK));
-ylabel(strcat("CLIA ",Label_12CK));
+xlabel(strcat("CLIA ",Label_12CK));
 line(ah1,[ah1.XLim(1) ah1.XLim(2)],[ah1.YLim(1) ah1.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
 [r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
 [r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
@@ -88,7 +88,7 @@ for i = 1:nGroups
     sh.MarkerFaceAlpha = AlphaValue;
 end
 xlabel(strcat("MCC ",Label_RSI));
-ylabel(strcat("CLIA ",Label_RSI));
+xlabel(strcat("CLIA ",Label_RSI));
 line(ah2,[ah2.XLim(1) ah2.XLim(2)],[ah2.YLim(1) ah2.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
 [r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
 [r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
@@ -97,9 +97,7 @@ Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
 text(ah2,0.05,0.95,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
 legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
 
-exportgraphics(gcf,'Figure_1A.pdf')
-exportgraphics(gcf,'Figure_1A.png','Resolution',600)
-
+SavePDF_AEB('Figure_1A')
 %%
 % Figure 1B
 SheetName="Repeatability";
@@ -168,10 +166,7 @@ xlabel('Sample');
 ylabel(Label_RSI)
 
 legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
-
-exportgraphics(gcf,'Figure_1B.pdf')
-exportgraphics(gcf,'Figure_1B.png','Resolution',600)
-
+SavePDF_AEB('Figure_1B')
 
 %%
 % Figure 2A
@@ -241,10 +236,7 @@ xlabel('Sample');
 ylabel(Label_RSI)
 
 legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
-
-exportgraphics(gcf,'Figure_2A.pdf')
-exportgraphics(gcf,'Figure_2A.png','Resolution',600)
-
+SavePDF_AEB('Figure_2A')
 
 
 %%
@@ -290,7 +282,7 @@ for i = 1:nGroups
     sh.MarkerFaceAlpha = AlphaValue;
 end
 xlabel('Sample');
-ylabel(Label_12CK)
+ylabel('Label_12CK)
 
 % B, RSI
 y_var=table2array(T(:,'RSI'));
@@ -313,13 +305,10 @@ for i = 1:nGroups
     sh.MarkerFaceAlpha = AlphaValue;
 end
 xlabel('Sample');
-ylabel(Label_RSI)
+ylabel('RSI')
 
 legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
-
-exportgraphics(gcf,'Figure_2B.pdf')
-exportgraphics(gcf,'Figure_2B.png','Resolution',600)
-
+SavePDF_AEB('Figure_2B')
 
 
 %%
@@ -364,7 +353,7 @@ for i = 1:nGroups
     sh.MarkerFaceAlpha = AlphaValue;
 end
 xlabel('Sample');
-ylabel(Label_12CK)
+ylabel('12CK')
 
 % B, RSI
 y_var=table2array(T(:,'RSI'));
@@ -389,12 +378,10 @@ for i = 1:nGroups
     sh.MarkerFaceAlpha = AlphaValue;
 end
 xlabel('Sample');
-ylabel(Label_RSI)
+ylabel('RSI')
 
 legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
-
-exportgraphics(gcf,'Figure_3.pdf')
-exportgraphics(gcf,'Figure_3.png','Resolution',600)
+SavePDF_AEB('Figure_3')
 
 
 
@@ -447,7 +434,7 @@ for i = 1:nGroups
     sh.MarkerFaceAlpha = AlphaValue;
 end
 xlabel('Sample');
-ylabel(Label_12CK)
+ylabel('12CK')
 
 % B, RSI
 y_var=table2array(T(:,'RSI'));
@@ -472,12 +459,14 @@ for i = 1:nGroups
     sh.MarkerFaceAlpha = AlphaValue;
 end
 xlabel('Sample');
-ylabel(Label_RSI)
+ylabel('RSI')
 
 legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
+SavePDF_AEB('Figure_4')
 
-exportgraphics(gcf,'Figure_4.pdf')
-exportgraphics(gcf,'Figure_4.png','Resolution',600)
+
+
+
 
 
 
@@ -525,9 +514,8 @@ for i = 1:nGroups
     sh.MarkerEdgeAlpha = AlphaValueMarkerLine;
     sh.MarkerFaceAlpha = AlphaValue;
 end
-xlabel(strcat("Surgery ",Label_12CK));
-ylabel(strcat("Biopsy ",Label_12CK));
-
+xlabel('Surgery 12CK');
+ylabel('Biopsy 12CK')
 line(ah1,[ah1.XLim(1) ah1.XLim(2)],[ah1.YLim(1) ah1.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
 [r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
 [r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
@@ -554,8 +542,8 @@ for i = 1:nGroups
     sh.MarkerEdgeAlpha = AlphaValueMarkerLine;
     sh.MarkerFaceAlpha = AlphaValue;
 end
-xlabel(strcat("Surgery ",Label_RSI));
-ylabel(strcat("Biopsy ",Label_RSI));
+xlabel('Surgery RSI');
+ylabel('Biopsy RSI')
 line(ah2,[ah2.XLim(1) ah2.XLim(2)],[ah2.YLim(1) ah2.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
 [r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
 [r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
@@ -564,8 +552,7 @@ Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
 text(ah2,0.05,0.95,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
 legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
 
-exportgraphics(gcf,'Figure_5A.pdf')
-exportgraphics(gcf,'Figure_5A.png','Resolution',600)
+SavePDF_AEB('Figure_5A')
 
 
 %%
@@ -607,9 +594,8 @@ for i = 1:nGroups
     sh.MarkerEdgeAlpha = AlphaValueMarkerLine;
     sh.MarkerFaceAlpha = AlphaValue;
 end
-xlabel(strcat("Surgery ",Label_12CK));
-ylabel(strcat("Biopsy ",Label_12CK));
-
+xlabel('Surgery 12CK');
+ylabel('Biopsy 12CK')
 line(ah1,[ah1.XLim(1) ah1.XLim(2)],[ah1.YLim(1) ah1.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
 [r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
 [r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
@@ -636,8 +622,8 @@ for i = 1:nGroups
     sh.MarkerEdgeAlpha = AlphaValueMarkerLine;
     sh.MarkerFaceAlpha = AlphaValue;
 end
-xlabel(strcat("Surgery ",Label_RSI));
-ylabel(strcat("Biopsy ",Label_RSI));
+xlabel('Surgery RSI');
+ylabel('Biopsy RSI')
 line(ah2,[ah2.XLim(1) ah2.XLim(2)],[ah2.YLim(1) ah2.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
 [r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
 [r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
@@ -646,8 +632,7 @@ Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
 text(ah2,0.05,0.95,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
 legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
 
-exportgraphics(gcf,'Figure_5B.pdf')
-exportgraphics(gcf,'Figure_5B.png','Resolution',600)
+SavePDF_AEB('Figure_5B')
 
 
 
@@ -685,9 +670,7 @@ NudgeVal = (max_xy - min_xy) / 25;
 ah1.XLim=[min_xy-NudgeVal max_xy+NudgeVal];
 ah1.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
 
-[fh, stats] = PassingBablok(x_var,y_var,strcat("MCC ",Label_12CK),strcat("Covance ",Label_12CK),true,fh,ah1);
-
-
+[fh, stats] = PassingBablok(x_var,y_var,'MCC 12CK','Covance 12CK',true,fh,ah1);
 % xlabel('Surgery 12CK');
 % ylabel('Biopsy 12CK')
 % line(ah1,[ah1.XLim(1) ah1.XLim(2)],[ah1.YLim(1) ah1.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
@@ -713,7 +696,7 @@ max_xy = max([x_var;y_var]);
 NudgeVal = (max_xy - min_xy) / 25;
 ah2.XLim=[min_xy-NudgeVal max_xy+NudgeVal];
 ah2.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
-[fh, stats] = PassingBablok(x_var,y_var,strcat("MCC ",Label_RSI),strcat("Covance ",Label_RSI),true,fh,ah2);
+[fh, stats] = PassingBablok(x_var,y_var,'MCC RSI','Covance RSI',true,fh,ah2);
 
 % xlabel('Surgery RSI');
 % ylabel('Biopsy RSI')
@@ -725,5 +708,4 @@ ah2.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
 % text(ah2,0.05,0.95,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
 % legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
 
-exportgraphics(gcf,'Figure_6.pdf')
-exportgraphics(gcf,'Figure_6.png','Resolution',600)
+SavePDF_AEB('Figure_6')
