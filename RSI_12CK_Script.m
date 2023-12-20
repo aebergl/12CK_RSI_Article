@@ -1,12 +1,10 @@
 
-cd /Users/bergluae/AEBERGL/USR/BERGLUND/12CK_RSI
-FileName = "DATA_Table.xlsx";
 
+FileName = "Supplemental Table 1.xlsx";
 FontSize = 7;
 LineWidth = 0.5;
 GridLines = 'on';
 FigureSize = [7,2.5];
-AxisType = 'normal';
 cMAP=GetPalette('Tab10');
 MarkerSize = 75;
 MarkerEdgeLineWidth = 0.5;
@@ -16,7 +14,6 @@ MarkerEdgeColor = [0.1 0.1 0.1];
 MarkerTypes = {'o','d','v','^','<','>'}';
 MarkerTypes = repmat(MarkerTypes,10,1);
 NudgeAmount = 20;
-
 Label_12CK = "12CK GES";
 Label_RSI = "RSI";
 
@@ -24,8 +21,8 @@ Label_RSI = "RSI";
 %%
 % Figure 1A
 SheetName="Proficiency";
-opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
-T=readtable('DATA_Table.xlsx',opts);
+opts=detectImportOptions(FileName,'Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1,'VariableNamesRange',1);
+T=readtable(FileName,opts);
 X_Samples = "MGC" + wildcardPattern;
 Y_Samples = "CLIA" + wildcardPattern;
 Groups = table2array(T(X_Samples,'Display Name'));
@@ -62,10 +59,8 @@ end
 xlabel(strcat("MCC ",Label_12CK));
 ylabel(strcat("CLIA ",Label_12CK));
 line(ah1,[ah1.XLim(1) ah1.XLim(2)],[ah1.YLim(1) ah1.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
-[r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
-[r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
-% Str(1) = {sprintf('r = %.3f p = %0.3g',r_corr_P,p_corr_P)};
-% Str(2) = {sprintf('\\rho = %.3f p = %0.3g',r_corr_S, p_corr_S)};
+[r_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
+[r_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
 Str(1) = {sprintf('r = %.3f',r_corr_P)};
 Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
 text(ah1,min_xy + NudgeVal/2,max_xy-NudgeVal/2,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
@@ -90,8 +85,8 @@ end
 xlabel(strcat("MCC ",Label_RSI));
 ylabel(strcat("CLIA ",Label_RSI));
 line(ah2,[ah2.XLim(1) ah2.XLim(2)],[ah2.YLim(1) ah2.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
-[r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
-[r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
+[r_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
+[r_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
 Str(1) = {sprintf('r = %.3f',r_corr_P)};
 Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
 text(ah2,0.05,0.95,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
@@ -103,8 +98,8 @@ exportgraphics(gcf,'Figure_1A.png','Resolution',600)
 %%
 % Figure 1B
 SheetName="Repeatability";
-opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
-T=readtable('DATA_Table.xlsx',opts);
+opts=detectImportOptions(FileName,'Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1,'VariableNamesRange',1);
+T=readtable(FileName,opts);
 
 Groups = table2array(T(:,'Display Name'));
 UniqueGroups = unique(Groups,'Stable');
@@ -178,8 +173,8 @@ exportgraphics(gcf,'Figure_1B.png','Resolution',600)
 cMAP=GetPalette('Tab20');
 MarkerTypes = {'o','o','d','d','^','^'}';
 SheetName="O2O";
-opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
-T=readtable('DATA_Table.xlsx',opts);
+opts=detectImportOptions(FileName,'Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1,'VariableNamesRange',1);
+T=readtable(FileName,opts);
 
 Groups = table2array(T(:,'Display Name'));
 UniqueGroups = unique(Groups,'Stable');
@@ -253,8 +248,8 @@ cMAP=GetPalette('Tab10');
 MarkerTypes = {'o','d','v','^','<','>'}';
 MarkerTypes = repmat(MarkerTypes,10,1);
 SheetName="Run1 vs Run2";
-opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
-T=readtable('DATA_Table.xlsx',opts);
+opts=detectImportOptions(FileName,'Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1,'VariableNamesRange',1);
+T=readtable(FileName,opts);
 
 Groups = table2array(T(:,'Display Name'));
 UniqueGroups = unique(Groups,'Stable');
@@ -325,8 +320,8 @@ exportgraphics(gcf,'Figure_2B.png','Resolution',600)
 %%
 % Figure 3
 SheetName="LOD";
-opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
-T=readtable('DATA_Table.xlsx',opts);
+opts=detectImportOptions(FileName,'Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1,'VariableNamesRange',1);
+T=readtable(FileName,opts);
 
 Groups = table2array(T(:,'Display Name'));
 UniqueGroups = unique(Groups,'Stable');
@@ -408,8 +403,8 @@ MarkerTypes = repmat(MarkerTypes,10,1);
 
 
 SheetName="ImpMacroDiss";
-opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
-T=readtable('DATA_Table.xlsx',opts);
+opts=detectImportOptions(FileName,'Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1,'VariableNamesRange',1);
+T=readtable(FileName,opts);
 
 Groups = table2array(T(:,'Display Name'));
 UniqueGroups = unique(Groups,'Stable');
@@ -490,8 +485,8 @@ MarkerTypes = repmat(MarkerTypes,10,1);
 
 
 SheetName="SurgVsBiop_A";
-opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
-T=readtable('DATA_Table.xlsx',opts);
+opts=detectImportOptions(FileName,'Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1,'VariableNamesRange',1);
+T=readtable(FileName,opts);
 X_Samples = "Surg_" + wildcardPattern;
 Y_Samples = "PB_" + wildcardPattern;
 Groups = table2array(T(X_Samples,'Display Name'));
@@ -529,10 +524,8 @@ xlabel(strcat("Surgery ",Label_12CK));
 ylabel(strcat("Biopsy ",Label_12CK));
 
 line(ah1,[ah1.XLim(1) ah1.XLim(2)],[ah1.YLim(1) ah1.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
-[r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
-[r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
-% Str(1) = {sprintf('r = %.3f p = %0.3g',r_corr_P,p_corr_P)};
-% Str(2) = {sprintf('\\rho = %.3f p = %0.3g',r_corr_S, p_corr_S)};
+[r_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
+[r_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
 Str(1) = {sprintf('r = %.3f',r_corr_P)};
 Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
 text(ah1,min_xy + NudgeVal/2,max_xy-NudgeVal/2,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
@@ -557,8 +550,8 @@ end
 xlabel(strcat("Surgery ",Label_RSI));
 ylabel(strcat("Biopsy ",Label_RSI));
 line(ah2,[ah2.XLim(1) ah2.XLim(2)],[ah2.YLim(1) ah2.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
-[r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
-[r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
+[r_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
+[r_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
 Str(1) = {sprintf('r = %.3f',r_corr_P)};
 Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
 text(ah2,0.05,0.95,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
@@ -572,8 +565,8 @@ exportgraphics(gcf,'Figure_5A.png','Resolution',600)
 %Figure 5B
 
 SheetName="SurgVsBiop_B";
-opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
-T=readtable('DATA_Table.xlsx',opts);
+opts=detectImportOptions(FileName,'Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1,'VariableNamesRange',1);
+T=readtable(FileName,opts);
 X_Samples = "surgery_" + wildcardPattern;
 Y_Samples = "biopsy_" + wildcardPattern;
 Groups = table2array(T(X_Samples,'Display Name'));
@@ -611,10 +604,8 @@ xlabel(strcat("Surgery ",Label_12CK));
 ylabel(strcat("Biopsy ",Label_12CK));
 
 line(ah1,[ah1.XLim(1) ah1.XLim(2)],[ah1.YLim(1) ah1.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
-[r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
-[r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
-% Str(1) = {sprintf('r = %.3f p = %0.3g',r_corr_P,p_corr_P)};
-% Str(2) = {sprintf('\\rho = %.3f p = %0.3g',r_corr_S, p_corr_S)};
+[r_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
+[r_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
 Str(1) = {sprintf('r = %.3f',r_corr_P)};
 Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
 text(ah1,min_xy + NudgeVal/2,max_xy-NudgeVal/2,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
@@ -655,8 +646,8 @@ exportgraphics(gcf,'Figure_5B.png','Resolution',600)
 %Figure 6
 
 SheetName="Concordance";
-opts=detectImportOptions('DATA_Table.xlsx','Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1);
-T=readtable('DATA_Table.xlsx',opts);
+opts=detectImportOptions(FileName,'Sheet',SheetName,'FileType','spreadsheet','VariableNamingRule','preserve',"TextType","string",'RowNamesRange',1,'VariableNamesRange',1);
+T=readtable(FileName,opts);
 X_Samples = "MCC_" + wildcardPattern;
 Y_Samples = "COV_" + wildcardPattern;
 Groups = table2array(T(X_Samples,'Display Name'));
@@ -685,19 +676,8 @@ NudgeVal = (max_xy - min_xy) / 25;
 ah1.XLim=[min_xy-NudgeVal max_xy+NudgeVal];
 ah1.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
 
-[fh, stats] = PassingBablok(x_var,y_var,strcat("MCC ",Label_12CK),strcat("Covance ",Label_12CK),true,fh,ah1);
+[fh, ~] = PassingBablok(x_var,y_var,strcat("MCC ",Label_12CK),strcat("COV ",Label_12CK),true,fh,ah1);
 
-
-% xlabel('Surgery 12CK');
-% ylabel('Biopsy 12CK')
-% line(ah1,[ah1.XLim(1) ah1.XLim(2)],[ah1.YLim(1) ah1.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
-% [r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
-% [r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
-% Str(1) = {sprintf('r = %.3f p = %0.3g',r_corr_P,p_corr_P)};
-% Str(2) = {sprintf('\\rho = %.3f p = %0.3g',r_corr_S, p_corr_S)};
-% Str(1) = {sprintf('r = %.3f',r_corr_P)};
-% Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
-% text(ah1,min_xy + NudgeVal/2,max_xy-NudgeVal/2,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
 
 % RSI
 x_var=table2array(T(X_Samples,'RSI'));
@@ -713,17 +693,7 @@ max_xy = max([x_var;y_var]);
 NudgeVal = (max_xy - min_xy) / 25;
 ah2.XLim=[min_xy-NudgeVal max_xy+NudgeVal];
 ah2.YLim=[min_xy-NudgeVal max_xy+NudgeVal];
-[fh, stats] = PassingBablok(x_var,y_var,strcat("MCC ",Label_RSI),strcat("Covance ",Label_RSI),true,fh,ah2);
-
-% xlabel('Surgery RSI');
-% ylabel('Biopsy RSI')
-% line(ah2,[ah2.XLim(1) ah2.XLim(2)],[ah2.YLim(1) ah2.YLim(2)],'Color',[0.5 0.5 0.5],'lineWidth',1,'LineStyle','--');
-% [r_corr_P, p_corr_P] = corr(x_var,y_var,'type','Pearson','rows','pairwise');
-% [r_corr_S, p_corr_S] = corr(x_var,y_var,'type','Spearman','rows','pairwise');
-% Str(1) = {sprintf('r = %.3f',r_corr_P)};
-% Str(2) = {sprintf('\\rho = %.3f',r_corr_S)};
-% text(ah2,0.05,0.95,Str,'HorizontalAlignment','left','VerticalAlignment','top','Clipping','off','FontSize',FontSize,'FontWeight','normal');
-% legend(ah2,UniqueGroups,'Location','northeastoutside','Interpreter','none')
+[fh, stats] = PassingBablok(x_var,y_var,strcat("MCC ",Label_RSI),strcat("COV ",Label_RSI),true,fh,ah2);
 
 exportgraphics(gcf,'Figure_6.pdf')
 exportgraphics(gcf,'Figure_6.png','Resolution',600)
